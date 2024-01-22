@@ -42,6 +42,7 @@ function YouTubeUrlInput() {
         onKeyPress={handleKeyPress}
         error={Boolean(error)}
         helperText={error}
+        sx={{marginBottom: 20}}
         />
     );
 }

@@ -5,9 +5,3 @@
     justify-content: center;
     height: 100vh; /* Adjust the height based on your needs */
 }
-
-/* Add spacing between input and video player */
-.YouTubeUrlInput {
-    margin-bottom: 20px; /* Adjust the margin based on your needs */
-}
-  
