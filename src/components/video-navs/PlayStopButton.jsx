@@ -2,19 +2,26 @@ import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
-import {VideoControlsContext} from "../../context/index"
+import {VideoControlsContext} from "../../context/index";
+import {TimingToolsContext} from "../../context/index";
+import {timeout} from "../../services/timing-tools/timeout";
 
 const PlayStopButton = () => {
   const {isPlaying, setIsPlaying, resetTimeline} = useContext(VideoControlsContext)
-  
+  const [bar, bpm, timeoutBars] = useContext(TimingToolsContext);
+
+  //const onStartPlayingCallbacks = [()=>timeout(timeoutBars, bpm, bar)];
 
   const handleButtonClick = () => {
-    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-
     if (!isPlaying){
       resetTimeline();
+      timeout(timeoutBars, bpm, bar);
+      /*for (let callback of onStartPlayingCallbacks){
+        callback();
+      }*/
     }
-    // Add logic for play/pause action here (e.g., start/stop video playback)
+
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
   };
 
   return (
