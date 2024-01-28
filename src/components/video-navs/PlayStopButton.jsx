@@ -12,13 +12,10 @@ const PlayStopButton = () => {
 
   //const onStartPlayingCallbacks = [()=>timeout(timeoutBars, bpm, bar)];
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     if (!isPlaying){
       resetTimeline();
-      timeout(timeoutBars, bpm, bar);
-      /*for (let callback of onStartPlayingCallbacks){
-        callback();
-      }*/
+      await timeout(timeoutBars, bpm, bar);
     }
 
     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
