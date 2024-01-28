@@ -18,6 +18,8 @@ const PlayStopButton = () => {
     if (!isPlayingPlayerUnbonded){
       isPlayingPlayerUnbonded = !isPlayingPlayerUnbonded;
       resetTimeline();
+      metronome.current.bpm = bpm;
+      metronome.current.rhythm = bar;
       metronome.current.start();
       await timeout(timeoutBars, bpm, bar);
       setIsPlaying(() => true);
