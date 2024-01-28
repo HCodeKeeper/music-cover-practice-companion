@@ -9,7 +9,7 @@ export const DEFAULT_BAR = 4;
 
 
 export default function TimingContainer(){
-    const [bar, setBar, bpm, setBPM, timeoutBars, setTimeout] = useContext(TimingToolsContext);
+    const {bar, setBar, bpm, setBPM, timeoutBars, setTimeout} = useContext(TimingToolsContext);
 
     return (
         <div className="timing-tools">

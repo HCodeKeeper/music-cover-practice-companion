@@ -45,10 +45,9 @@ function App() {
           <ReactPlayer ref={playerRef} url={videoUrl} volume={volume / 100} playing={isPlaying} />
           <VolumeSlider/>
           <PlayStopButton/>
+          <TimingContainer/>
         </TimingToolsContext.Provider>
       </VideoControlsContext.Provider>
-
-      <TimingContainer/>
     </div>
   );
 }

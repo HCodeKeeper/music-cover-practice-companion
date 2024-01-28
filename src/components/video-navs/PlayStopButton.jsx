@@ -8,7 +8,7 @@ import {timeout} from "../../services/timing-tools/timeout";
 
 const PlayStopButton = () => {
   const {isPlaying, setIsPlaying, resetTimeline} = useContext(VideoControlsContext)
-  const [bar, bpm, timeoutBars] = useContext(TimingToolsContext);
+  const {bar, setBar, bpm, setBPM, timeoutBars, setTimeout} = useContext(TimingToolsContext);
 
   //const onStartPlayingCallbacks = [()=>timeout(timeoutBars, bpm, bar)];
 
