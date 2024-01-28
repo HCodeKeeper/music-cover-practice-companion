@@ -5,7 +5,6 @@ export function timeout(bars, bpm, rhythmOfFour){
         if (bars > 0) {
             const durationInSeconds = getTimeoutDurationPerBar(bpm, rhythmOfFour) * bars;
             setTimeout(() => {
-                console.log(durationInSeconds);
                 resolve(durationInSeconds); // Resolve the promise after timeout
             }, durationInSeconds);
         } else {
