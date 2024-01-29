@@ -62,7 +62,7 @@ export default function TimingContainer(){
                 const inputValue = parseInt(event.target.value, '');
                 setTimeout( ()=> {
                     if (Number.isInteger(inputValue)){
-                        return inputValue > 0 ? inputValue : DEFAULT_BAR;
+                        return inputValue >= 0 ? inputValue : DEFAULT_BAR;
                     }
                     else{
                         return "";

@@ -1,50 +1,36 @@
-import firstBarSound from "../../assets/frst_bar.mp3";
-import barSound from "../../assets/bar.mp3";
-
-class SoundPlayer{
-    constructor(){
-        if (this.constructor == SoundPlayer){
-            throw new Error('Not implemented');
-        }
+class MetronomeDefaultSoundPlayer {
+    constructor(volume = 1, timeSignature = 4) {
+        this.timeSignature = timeSignature;
+        this.accentPitch = 380;
+        this.offBeatPitch = 200;
+        this.context = new (window.AudioContext || window.webkitAudioContext)();
+        this.volume = volume;
     }
 
-    play(){
-        throw new Error('Not implemented');
+    play(noteCount = 0) {
+        const note = this.context.createOscillator();
+        const gainNode = this.context.createGain();
+
+        if (noteCount % this.timeSignature === 0) {
+            note.frequency.value = this.accentPitch;
+        } else {
+            note.frequency.value = this.offBeatPitch;
+        }
+
+        note.connect(gainNode);
+        gainNode.connect(this.context.destination);
+        
+        // Set volume
+        gainNode.gain.value = this.volume;
+
+        // Start and stop the oscillator
+        note.start();
+        note.stop(this.context.currentTime + 0.05);
+    }
+
+    setVolume(volume) {
+        this.volume = volume;
     }
 }
-
-
-class MetronomeDefaultSoundPlayer extends SoundPlayer {
-    
-
-    constructor(volume=1){
-        super();
-        this.firstBarSound = firstBarSound;
-        this.barSound = barSound;
-        this.firstBarAudio = new Audio(firstBarSound);
-        this.barAudio = new Audio(barSound);
-        this.setVolume(volume);
-        this.playedCount = 0;
-    }
-
-    play(){
-        if (!(this.playedCount % 4)){
-            this.firstBarAudio.play();
-        } else{
-            this.barAudio.play();
-        }
-        this.playedCount++;
-    }
-
-    reset(){
-        this.playedCount = 0;
-    }
-
-    setVolume(volume){
-        this.firstBarAudio.volume = volume;
-        this.barAudio.volume = volume;
-    }
-}
-
 
 export default MetronomeDefaultSoundPlayer;

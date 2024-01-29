@@ -5,7 +5,7 @@ import StopIcon from '@mui/icons-material/Stop';
 import {VideoControlsContext} from "../../context/index";
 import {TimingToolsContext} from "../../context/index";
 import {timeout} from "../../services/timing-tools/timeout";
-import Metronome from "../../services/timing-tools/metronome"
+import Metronome from "../../services/timing-tools/thirdPartyMetronome";
 
 const PlayStopButton = () => {
   const {isPlaying, setIsPlaying, resetTimeline} = useContext(VideoControlsContext)
@@ -14,12 +14,14 @@ const PlayStopButton = () => {
   let isPlayingPlayerUnbonded = false;
 
   const handleButtonClick = async () => {
+    // I know it's bad
     //prev isPlaying state
     if (!isPlayingPlayerUnbonded){
       isPlayingPlayerUnbonded = !isPlayingPlayerUnbonded;
       resetTimeline();
       metronome.current.bpm = bpm;
-      metronome.current.rhythm = bar;
+      metronome.current.timeSignature = bar;
+      metronome.current.soundPlayer.timeSignature = bar;
       metronome.current.start();
       await timeout(timeoutBars, bpm, bar);
       setIsPlaying(() => true);

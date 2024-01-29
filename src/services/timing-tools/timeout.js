@@ -2,7 +2,7 @@ const rhythmTimingByFourPerBarModifier = 60; // 1/4 rhythm in ms
 
 export function timeout(bars, bpm, rhythmOfFour){
     return new Promise((resolve, reject) => {
-        if (bars > 0) {
+        if (bars >= 0) {
             const durationInSeconds = getTimeoutDurationPerBar(bpm, rhythmOfFour) * bars;
             setTimeout(() => {
                 resolve(durationInSeconds); // Resolve the promise after timeout
